@@ -1,0 +1,43 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+}
+
+body {
+  background-color: #1d1d1d;
+}
+
+#navBar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  list-style-type: none;
+}
+
+img {
+  width: 100%;
+  height: auto;
+}
+
+li {
+  padding: 10px 40px 7px 40px;
+  background-color: #292929;
+}
+
+.homeButton {
+  border-radius: 0px 0px 10px 10px;
+}
+.codeButton {
+  border-radius: 0px 0px 10px 10px;
+  background-color: #1d1d1d;
+}
+
+#content {
+  background-color: #292929;
+  margin: -6vh auto 0 auto;
+  height: 90vh;
+  width: 95vw;
+  border-radius: 15px;
+}
