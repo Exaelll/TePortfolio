@@ -31,20 +31,20 @@ img {
 .homeButton {
   border-radius: 0px 0px 10px 10px;
 }
+.homeButton:hover img {
+  height: 65%;
+}
 .homeButton:hover {
-  img {
-    height: 65%;
-  }
   border-radius: 0px 0px 10px 10px;
 }
 .codeButton {
   border-radius: 0px 0px 10px 10px;
   background-color: #1d1d1d;
 }
+.codeButton:hover img {
+  height: 65%;
+}
 .codeButton:hover {
-  img {
-    height: 65%;
-  }
   border-radius: 0px 0px 10px 10px;
 }
 
