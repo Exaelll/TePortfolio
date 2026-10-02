@@ -1,254 +1,263 @@
 <html>
-  <head>
-    <title>Yofiel Portfolio</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="styles.css" />
-    <link rel="icon" href="favicon.ico" />
-  </head>
-  <body>
+
+<head>
+  <title>Yofiel Portfolio</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="favicon.ico" />
+
+  <!--Font Styles-->
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+  </style>
+</head>
+
+<body>
+
+  <main class="cabinet">
     <header>
-      <p>YOFIEL TE / PERSONAL ARCHIVE</p>
-      <p>CAREER PORTFOLIO</p>
+        <span class="left-aligned">
+          <p>YOFIEL TE / PERSONAL ARCHIVE</p>
+          <p>CAREER PORTFOLIO</p>
+        </span>
 
-      <!-- Text below must be right-aligned -->
-      <p>CABINET 01 · FOUR FOLDERS</p>
-    </header>
+        <!-- Text below must be right-aligned -->
+        <span class="right-aligned">
+          <p>CABINET 01 · FOUR FOLDERS</p>
+        </span>
 
-    <main class="cabinet">
-      <div class="drawer">
-        <header>
-          <!-- Navigation links can go here -->
-          <nav>
-            <ul>
-              <li><a href="#home">Home</a></li>
-              <li><a href="#projects">Projects</a></li>
-              <li><a href="#experience">Experience</a></li>
-              <li><a href="#contact">Contact</a></li>
-            </ul>
-          </nav>
-        </header>
+      </header>
 
+    <div class="drawer">
 
-        <!-- Home section -->
-        <section id="home" class="folder folder-home">
-          <div class="folder-content">
-            <p>PERSONAL ARCHIVE / 01</p>
-            <p>Hello, I'm</p>
-            <h1>Yofiel Te</h1>
-            <p>
-              Welcome to my career archive. Explore my projects, follow my
-              experience, or get in touch.
-            </p>
+      <nav>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
 
-            <a href="#projects" class="exploreProjectsBtn">Explore Projects</a>
-
-            <hr />
-
-            <p>FILE: YOFIEL_TE</p>
-            <p>FIELD: INFORMATION TECHNOLOGY</p>
-            <p>SPECIALIZATION: CLOUD COMPUTING</p>
-
-            <!-- Additional sections can go here -->
-            <div>
-              <div>
-                <hr />
-                <p>FOLDER 02</p>
-                <h3>Projects</h3>
-                <p>Project documents & work in progress</p>
-              </div>
-
-              <div>
-                <hr />
-                <p>FOLDER 03</p>
-                <h3>Experience</h3>
-                <p>Work, education & the next chapter</p>
-              </div>
-
-              <div>
-                <hr />
-                <p>FOLDER 04</p>
-                <h3>Contact</h3>
-                <p>A new conversation starts here</p>
-              </div>
-            </div>
-          </div>
-          <!-- Close folder-content -->
+      <!-- Home section -->
+      <section id="home" class="folder folder-home">
+        <div class="folder-content">
 
           <aside>
             <!-- Image below must be right-aligned -->
-            <div>
-              <img src="path/to/image.jpg" alt="Description of image" />
+            <div class="photo">
+              <img src="Yofiel - 1x1 Photo.jpeg" alt="Description of image" />
             </div>
           </aside>
+
+          <p class="archive-header">PERSONAL ARCHIVE / 01</p>
+          <p>Hello, I'm</p>
+          <h1 class="name">Yofiel Te</h1>
+          <p class="job-title">Information Systems Technology student specializing in Cloud Computing.</p>
+          <p class="archive-details">
+            Welcome to my career archive. Explore my projects, follow my
+            experience, or get in touch.
+          </p>
+
+          <a href="#projects" class="exploreProjectsBtn">EXPLORE PROJECTS ></a>
+
+          <hr />
+
+          <p>FILE: YOFIEL_TE</p>
+          <p>FIELD: INFORMATION TECHNOLOGY</p>
+          <p>SPECIALIZATION: CLOUD COMPUTING</p>
+
+          <div class="additional-nav">
+
+            <div class="addition-nav-items">
+              <hr />
+              <p>FOLDER 02</p>
+              <h3>Projects -></h3>
+              <p>Project documents & work in progress</p>
+            </div>
+
+            <div class="addition-nav-items">
+              <hr />
+              <p>FOLDER 03</p>
+              <h3>Experience -></h3>
+              <p>Work, education & the next chapter</p>
+            </div>
+
+            <div class="addition-nav-items">
+              <hr />
+              <p>FOLDER 04</p>
+              <h3>Contact -></h3>
+              <p>A new conversation starts here</p>
+            </div>
+
+          </div>
 
           <footer>
             <p>YOFIEL TE · PERSONAL CAREER ARCHIVE / END OF FILE 01</p>
           </footer>
-        </section>
+
+        </div>
+        <!-- Close folder-content -->
+      </section>
 
 
-        <!-- Projects section -->
-        <section id="projects" class="folder folder-projects">
-          <div class="folder-content">
-            <p>PERSONAL ARCHIVE / 02</p>
-            <h2>Project files.</h2>
-            <p>A place for the work I'm building.</p>
-            <!--Counts the number of projects-->
-            <p>00 PROJECTS</p>
 
-            <div class="project-container">
-              <article class="project-item">
-                <p>Project Title</p>
-                <img
-                  src="path/to/project-image.jpg"
-                  alt="Description of project image"
-                />
-                <h3>Project Title</h3>
-                <p>Project description goes here.</p>
-                <a href="path/to/project-link.html">View Project</a>
-              </article>
-              <!-- Additional project items can go here -->
-            </div>
+      <!-- Projects section -->
+      <section id="projects" class="folder folder-projects">
+        <div class="folder-content">
+          <p class="archive-header">PERSONAL ARCHIVE / 02</p>
+          <h2 class="content-title">Project files.</h2>
+          <p class="archive-details">A place for the work I'm building.</p>
+          <!--Counts the number of projects-->
+          <p>00 PROJECTS</p>
 
-            <footer>
-              <p>YOFIEL TE · PERSONAL CAREER ARCHIVE / END OF FILE 02</p>
-            </footer>
+          <div class="project-container">
+            <article class="project-item">
+              <p>Project Title</p>
+              <img src="path/to/project-image.jpg" alt="Description of project image" />
+              <h3>Project Title</h3>
+              <p>Project description goes here.</p>
+              <a href="path/to/project-link.html">View Project</a>
+            </article>
+            <!-- Additional project items can go here -->
           </div>
-          <!-- Close folder-content -->
-        </section>
+
+          <footer>
+            <p>YOFIEL TE · PERSONAL CAREER ARCHIVE / END OF FILE 02</p>
+          </footer>
+        </div>
+        <!-- Close folder-content -->
+      </section>
 
 
-        <!-- Experience section -->
-        <section id="experience" class="folder folder-experience">
-          <div class="folder-content">
-            <p>PERSONAL ARCHIVE / 03</p>
-            <h2>The file history.</h2>
-            <p>
-              Work, education and space for what comes next. A continuous
-              record, one chapter at a time.
-            </p>
+      <!-- Experience section -->
+      <section id="experience" class="folder folder-experience">
+        <div class="folder-content">
+          <p class="archive-header">PERSONAL ARCHIVE / 03</p>
+          <h2 class="content-title">The file history.</h2>
+          <p>
+            Work, education and space for what comes next. A continuous
+            record, one chapter at a time.
+          </p>
 
-            <div>
-              <p>HISTORY / INDEX</p>
+          <div>
+            <p>HISTORY / INDEX</p>
 
-              <a href="">Work Experience</a>
-              <a href="">Education</a>
+            <a href="">Work Experience</a>
+            <a href="">Education</a>
 
-              <img src="" alt="" />
-            </div>
+            <img src="" alt="" />
+          </div>
 
-            <!-- Add timeline graphic for the experience section -->
-            <div class="timeline">
+          <!-- Add timeline graphic for the experience section -->
+          <div class="timeline">
 
-              <article class="timeline-item">
-                <div class="timeline-date">
-                  <p>2025 - PRESENT</p>
-                </div>
-                <div class="timeline-content">
-                  <h3>Guest Service Representative</h3>
+            <article class="timeline-item">
+              <div class="timeline-date">
+                <p>2025 - PRESENT</p>
+              </div>
+              <div class="timeline-content">
+                <h3>Guest Service Representative</h3>
 
-                  <p class="timeline-company">Extended Stay America / Hospitality Experience</p>
-                  <p>
-                    Responsibilities include assisting guests with check-in and
-                    check-out processes, providing information about hotel
-                    services, and ensuring a positive guest experience.
-                  </p>
-                  <p>
-                    Skills developed: Customer service, communication,
-                    problem-solving, and teamwork.
-                  </p>
-                </div>
-                <!-- Close timeline-content -->
-              </article>
+                <p class="timeline-company">Extended Stay America / Hospitality Experience</p>
+                <p>
+                  Responsibilities include assisting guests with check-in and
+                  check-out processes, providing information about hotel
+                  services, and ensuring a positive guest experience.
+                </p>
+                <p>
+                  Skills developed: Customer service, communication,
+                  problem-solving, and teamwork.
+                </p>
+              </div>
+              <!-- Close timeline-content -->
+            </article>
 
-              <article class="timeline-item">
-                <div class="timeline-date">
-              <p>EDUCATION / AUGUST 2026 - PRESENT</p>
-                </div>
-                <div class="timeline-content">
-              <h3>Information Systems Technology College Student</h3>
-                  <p class="timeline-company">Seminole State College of Florida</p>
-              <p>
-                Coursework includes studying information systems, software
-                development, and technology management.
-              </p>
-              <p>
-                Skills developed: Analytical thinking, problem-solving,
-                technical proficiency, and teamwork.
-              </p>
-                </div> <!-- Close timeline-content -->
-              </article>
+            <article class="timeline-item">
+              <div class="timeline-date">
+                <p>EDUCATION / AUGUST 2026 - PRESENT</p>
+              </div>
+              <div class="timeline-content">
+                <h3>Information Systems Technology College Student</h3>
+                <p class="timeline-company">Seminole State College of Florida</p>
+                <p>
+                  Coursework includes studying information systems, software
+                  development, and technology management.
+                </p>
+                <p>
+                  Skills developed: Analytical thinking, problem-solving,
+                  technical proficiency, and teamwork.
+                </p>
+              </div> <!-- Close timeline-content -->
+            </article>
 
-              <article class="timeline-item">
-                <div class="timeline-date">
-                  <p>EDUCATION / 2022 - 2024</p>
-                </div>
-                <div class="timeline-content">
-                  <h3>Information & Communications Technology High School Student</h3>
-                  <p class="timeline-company">Holy Trinity Academy, Philippines</p>
-                  <p>
-                    Coursework includes studying information & communications technology, including networking, software applications, and digital literacy.
-                  </p>
-                </div> <!-- Close timeline-content --> 
-              </article>
+            <article class="timeline-item">
+              <div class="timeline-date">
+                <p>EDUCATION / 2022 - 2024</p>
+              </div>
+              <div class="timeline-content">
+                <h3>Information & Communications Technology High School Student</h3>
+                <p class="timeline-company">Holy Trinity Academy, Philippines</p>
+                <p>
+                  Coursework includes studying information & communications technology, including networking, software
+                  applications, and digital literacy.
+                </p>
+              </div> <!-- Close timeline-content -->
+            </article>
 
             <footer>
               <p>YOFIEL TE · PERSONAL CAREER ARCHIVE / END OF FILE 03</p>
             </footer>
           </div>
           <!-- Close folder-content -->
-        </section>
+      </section>
 
 
-        <!-- Contact section -->
-        <section id="contact" class="folder folder-contact">
-          <div class="folder-content">
-            <p>PERSONAL ARCHIVE / 04</p>
-            <h2>Let's connect.</h2>
-            <p>
-              Have a question or an opportunity in mind? Start a conversation.
-            </p>
+      <!-- Contact section -->
+      <section id="contact" class="folder folder-contact">
+        <div class="folder-content">
+          <p class="archive-header">PERSONAL ARCHIVE / 04</p>
+          <h2 class="content-title">Let's connect.</h2>
+          <p class="archive-details">
+            Have a question or an opportunity in mind? Start a conversation.
+          </p>
 
-            <p>GET IN TOUCH</p>
+          <p>GET IN TOUCH</p>
 
-            <hr />
-            <p>EMAIL</p>
-            <a href="mailto:te.yofiel@gmail.com" target="_blank"
-              >My email address</a
-            >
-            <hr />
-            <p>LINKEDIN</p>
-            <a href="https://www.linkedin.com/in/te-yofiel" target="_blank"
-              >My LinkedIn Profile</a
-            >
-            <hr />
-            <p>GITHUB</p>
-            <a href="https://github.com/Exaelll" target="_blank"
-              >My GitHub Profile</a
-            >
-          </div>
+          <hr />
+          <p>EMAIL</p>
+          <a href="mailto:te.yofiel@gmail.com" target="_blank">My email address</a>
+          <hr />
+          <p>LINKEDIN</p>
+          <a href="https://www.linkedin.com/in/te-yofiel" target="_blank">My LinkedIn Profile</a>
+          <hr />
+          <p>GITHUB</p>
+          <a href="https://github.com/Exaelll" target="_blank">My GitHub Profile</a>
+
 
           <div>
             <form action="">
-              
+
             </form>
           </div>
 
           <footer>
-              <p>YOFIEL TE · PERSONAL CAREER ARCHIVE / END OF FILE 04</p>
-            </footer>
-          <!-- Close folder-content -->
-        </section>
-      </div>
-      <!-- Close drawer -->
-    </main>
-    <!-- Close cabinet -->
+            <p>YOFIEL TE · PERSONAL CAREER ARCHIVE / END OF FILE 04</p>
+          </footer>
 
-    <footer>
-      <p>YOFIEL_TE / CAREER FILES</p>
-    </footer>
+        </div> <!-- Close folder-content -->
+      </section>
+    </div>
+    <!-- Close drawer -->
+  </main>
+  <!-- Close cabinet -->
 
-    <script src="script.js"></script>
-  </body>
+  <footer>
+    <p>YOFIEL_TE / CAREER FILES</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+
 </html>
