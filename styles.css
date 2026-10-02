@@ -285,144 +285,151 @@ hr {
 .folder-experience {
 
     /* ---------- Layout ---------- */
-.experience-layout {
-    display: grid;
-    grid-template-columns: 280px 1fr;
-    gap: 60px;
-    align-items: start;
-    margin: 50px 0 40px;
-}
-
-/* ---------- Index card ---------- */
-.history-index {
-    background-color: #ede7da;
-    padding: 24px;
-    position: sticky;          /* stays in view while you scroll the timeline */
-    top: 20px;
-}
-
-.index-label {
-    color: #365d72;
-    font-size: 0.85em;
-    margin-bottom: 20px;
-}
-
-.history-index a {
-    display: block;
-    font-family: "Inter", sans-serif;
-    font-size: 1.15em;
-    color: #252f34;
-    text-decoration: none;
-    margin-bottom: 12px;
-}
-
-.history-index a:hover {
-    color: #365d72;
-}
-
-.index-note {
-    font-family: "Inter", sans-serif;
-    font-size: 0.9em;
-    line-height: 1.6;
-    color: #505050;
-    margin: 24px 0 0;
-}
-
-/* ---------- Timeline ---------- */
-.timeline {
-    position: relative;
-    padding-left: 32px;        /* room for the line and dots */
-}
-
-/* vertical line */
-.timeline::before {
-    content: "";
-    position: absolute;
-    left: 6px;                 /* centered under a 14px dot */
-    top: 0;
-    bottom: 0;
-    width: 1px;
-    background-color: #cfc8b9;
-}
-
-.timeline-item {
-    position: relative;
-    padding-bottom: 36px;
-}
-
-/* dot */
-.timeline-item::before {
-    content: "";
-    position: absolute;
-    left: -32px;               /* cancels the timeline's padding-left */
-    top: 0;
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
-    background-color: #365d72;
-    border: 2px solid #365d72;
-    z-index: 1;
-}
-
-/* hollow dot for future records */
-.timeline-item.future::before {
-    background-color: #f8f5ed;  /* must match the .folder-content background */
-}
-
-/* ---------- Timeline text ---------- */
-.timeline-item p {
-    margin-bottom: 12px;
-}
-
-.timeline-date {
-    color: #365d72;
-    font-size: 0.85em;
-    line-height: 14px;          /* lines up with the dot */
-}
-
-.timeline-item h3 {
-    font-family: "Inter", sans-serif;
-    font-size: 2em;
-    font-weight: 600;
-    color: #252f34;
-    margin-bottom: 14px;
-}
-
-.timeline-company {
-    font-family: "Inter", sans-serif;
-    font-size: 1.1em;
-    font-weight: 500;
-    color: #505050;
-}
-
-.timeline-text {
-    font-family: "Inter", sans-serif;
-    font-size: 1.05em;
-    color: #505050;
-}
-
-.timeline-meta {
-    font-size: 0.85em;
-    color: #505050;
-    margin-bottom: 0;
-}
-
-/* dot separator between meta items */
-.timeline-meta span + span::before {
-    content: "·";
-    margin: 0 20px;
-}
-
-/* ---------- Mobile ---------- */
-@media (max-width: 900px) {
     .experience-layout {
-        grid-template-columns: 1fr;
-        gap: 40px;
+        display: grid;
+        grid-template-columns: 280px 1fr;
+        gap: 60px;
+        align-items: start;
+        margin: 50px 0 40px;
     }
+
+    /* ---------- Index card ---------- */
     .history-index {
-        position: static;
+        background-color: #ede7da;
+        padding: 24px;
+        position: sticky;
+        /* stays in view while you scroll the timeline */
+        top: 20px;
     }
-}
+
+    .index-label {
+        color: #365d72;
+        font-size: 0.85em;
+        margin-bottom: 20px;
+    }
+
+    .history-index a {
+        display: block;
+        font-family: "Inter", sans-serif;
+        font-size: 1.15em;
+        color: #252f34;
+        text-decoration: none;
+        margin-bottom: 12px;
+    }
+
+    .history-index a:hover {
+        color: #365d72;
+    }
+
+    .index-note {
+        font-family: "Inter", sans-serif;
+        font-size: 0.9em;
+        line-height: 1.6;
+        color: #505050;
+        margin: 24px 0 0;
+    }
+
+    /* ---------- Timeline ---------- */
+    .timeline {
+        position: relative;
+        padding-left: 32px;
+        /* room for the line and dots */
+    }
+
+    /* vertical line */
+    .timeline::before {
+        content: "";
+        position: absolute;
+        left: 6px;
+        /* centered under a 14px dot */
+        top: 0;
+        bottom: 0;
+        width: 1px;
+        background-color: #cfc8b9;
+    }
+
+    .timeline-item {
+        position: relative;
+        padding-bottom: 36px;
+    }
+
+    /* dot */
+    .timeline-item::before {
+        content: "";
+        position: absolute;
+        left: -32px;
+        /* cancels the timeline's padding-left */
+        top: 0;
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        background-color: #365d72;
+        border: 2px solid #365d72;
+        z-index: 1;
+    }
+
+    /* hollow dot for future records */
+    .timeline-item.future::before {
+        background-color: #f8f5ed;
+        /* must match the .folder-content background */
+    }
+
+    /* ---------- Timeline text ---------- */
+    .timeline-item p {
+        margin-bottom: 12px;
+    }
+
+    .timeline-date {
+        color: #365d72;
+        font-size: 0.85em;
+        line-height: 14px;
+        /* lines up with the dot */
+    }
+
+    .timeline-item h3 {
+        font-family: "Inter", sans-serif;
+        font-size: 2em;
+        font-weight: 600;
+        color: #252f34;
+        margin-bottom: 14px;
+    }
+
+    .timeline-company {
+        font-family: "Inter", sans-serif;
+        font-size: 1.1em;
+        font-weight: 500;
+        color: #505050;
+    }
+
+    .timeline-text {
+        font-family: "Inter", sans-serif;
+        font-size: 1.05em;
+        color: #505050;
+    }
+
+    .timeline-meta {
+        font-size: 0.85em;
+        color: #505050;
+        margin-bottom: 0;
+    }
+
+    /* dot separator between meta items */
+    .timeline-meta span+span::before {
+        content: "·";
+        margin: 0 20px;
+    }
+
+    /* ---------- Mobile ---------- */
+    @media (max-width: 900px) {
+        .experience-layout {
+            grid-template-columns: 1fr;
+            gap: 40px;
+        }
+
+        .history-index {
+            position: static;
+        }
+    }
 
 }
 
