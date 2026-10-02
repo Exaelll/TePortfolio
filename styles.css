@@ -21,9 +21,14 @@ h3 {
 }
 
 .drawer {
+    position: relative;
+    /* spacers anchor to the drawer */
+    display: flex;
+    flex-direction: column;
     background-color: #252c30;
     border-radius: 10px;
-    padding: 42px 28px;
+    padding: 2vh 3vw;
+    /* a little more side room for the spacers */
 }
 
 hr {
@@ -45,6 +50,54 @@ hr {
 
 .left-aligned {
     text-align: left;
+}
+
+.spacer-left,
+.spacer-right {
+    position: absolute;
+    top: 12px;
+    bottom: 12px;
+    width: 8px;
+    background-color: #b8bfc4;
+    /* light gray like your screenshot */
+    border-radius: 5px;
+}
+
+.spacer-left {
+    left: 14px;
+    rotate: .1deg;
+    /* top leans in, bottom flares out */
+}
+
+.spacer-right {
+    right: 14px;
+    rotate: -.1deg;
+}
+
+.folder-tab-group {
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+    width:relative;
+    gap:10px;
+    border-bottom: 1px solid #d8b39b;
+}
+
+.folder-tab {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex: 1;
+    list-style: none;
+    text-decoration: none;
+    background-color: #d8c49b;
+    color: #252f34;
+    height: 5vh;
+    width: 21vw;
+    min-width:0;
+    border-radius: 4px 4px 0 0;
 }
 
 .folder {
@@ -97,6 +150,7 @@ hr {
     margin: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
 }
+
 .photo img {
     width: 100%;
     height: 100%;
@@ -111,34 +165,38 @@ hr {
     border-radius: 4px;
     transition: background-color 0.3s ease;
 }
+
 .exploreProjectsBtn:hover {
     background-color: #2c4a5a;
 }
 
-.home-details p{
+.home-details p {
     margin: 23px 0;
 }
 
-.additional-nav {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 40px;
-    gap: 15px;
-}
-.additional-nav-items {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    min-width: 0;
-}
+        .additional-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 40px;
+            gap: 15px;
+        }
+
+        .additional-nav-items {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            min-width: 0;
+        }
+
 .additional-nav-items h3 {
     font-size: 1.6em;
-    margin:0;
+    margin: 0;
     margin-bottom: 15px;
     font-family: "Inter", sans-serif;
 }
+
 .additional-nav-items p {
-    margin:0;
+    margin: 0;
     margin-bottom: 15px;
     font-family: "Inter", sans-serif;
 }
