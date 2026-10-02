@@ -16,19 +16,18 @@
 <body>
 
   <main class="cabinet">
-    
+
     <header>
-        <span class="left-aligned">
-          <p>YOFIEL TE / PERSONAL ARCHIVE</p>
-          <p>CAREER PORTFOLIO</p>
-        </span>
+      <span class="left-aligned">
+        <p>YOFIEL TE / PERSONAL ARCHIVE</p>
+        <p>CAREER PORTFOLIO</p>
+      </span>
 
-        <!-- Text below must be right-aligned -->
-        <span class="right-aligned">
-          <p>CABINET 01 · FOUR FOLDERS</p>
-        </span>
-
-      </header>
+      <!-- Text below must be right-aligned -->
+      <span class="right-aligned">
+        <p>CABINET 01 · FOUR FOLDERS</p>
+      </span>
+    </header>
 
     <div class="drawer">
 
@@ -38,10 +37,12 @@
         <ul class="folder-tab-group">
           <li><a class="folder-tab home" href="#home">01 - HOME</a></li>
           <li><a class="folder-tab projects" href="#projects">02 - PROJECTS</a></li>
-          <li ><a class="folder-tab experience" href="#experience">03 - EXPERIENCE</a></li>
+          <li><a class="folder-tab experience" href="#experience">03 - EXPERIENCE</a></li>
           <li><a class="folder-tab contact" href="#contact">04 - CONTACT</a></li>
         </ul>
       </nav>
+
+
 
       <!-- Home section -->
       <section id="home" class="folder folder-home">
@@ -68,9 +69,9 @@
           <hr />
 
           <span class="home-details">
-          <p>FILE: YOFIEL_TE</p>
-          <p>FIELD: INFORMATION TECHNOLOGY</p>
-          <p>SPECIALIZATION: CLOUD COMPUTING</p>
+            <p>FILE: YOFIEL_TE</p>
+            <p>FIELD: INFORMATION TECHNOLOGY</p>
+            <p>SPECIALIZATION: CLOUD COMPUTING</p>
           </span>
 
           <div class="additional-nav">
@@ -123,7 +124,7 @@
               <img src="path/to/project-image.jpg" alt="Description of project image" />
               <h3>Project Title</h3>
               <p>Project description goes here.</p>
-              <a href="path/to/project-link.html">View Project</a>
+              <a href="path/to/project-link.html" target="_blank">View Project</a>
             </article>
             <!-- Additional project items can go here -->
           </div>
@@ -134,6 +135,7 @@
         </div>
         <!-- Close folder-content -->
       </section>
+
 
 
       <!-- Experience section -->
@@ -219,6 +221,7 @@
       </section>
 
 
+
       <!-- Contact section -->
       <section id="contact" class="folder folder-contact">
         <div class="folder-content">
@@ -258,12 +261,18 @@
 
     </div>
     <!-- Close drawer -->
+
+    <footer class="drawer-face">
+      <div class="drawer-handle">
+        <p>YOFIEL_TE / CAREER FILES</p>
+        <hr>
+      </div>
+    </footer>
+
   </main>
   <!-- Close cabinet -->
 
-  <footer>
-    <p>YOFIEL_TE / CAREER FILES</p>
-  </footer>
+
 
   <script src="script.js"></script>
 </body>
