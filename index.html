@@ -1,6 +1,11 @@
 <html>
   <head>
-    <title>My Page</title>
+    <title>Yofiel Portfolio</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="icon" href="favicon.ico" />
+    <link rel="text/javascript" src="script.js" />
   </head>
   <body>
     <header>
@@ -24,6 +29,7 @@
         </nav>
       </header>
 
+      <!-- Home section -->
       <section id="home">
         <p>PERSONAL ARCHIVE / 01</p>
         <p>Hello, I'm</p>
@@ -43,37 +49,148 @@
 
         <!-- Additional sections can go here -->
         <div>
-          <hr />
-          <p>FOLDER 02</p>
-          <h2>Projects</h2>
-          <p>Project documents & work in progress</p>
+          <div>
+            <hr />
+            <p>FOLDER 02</p>
+            <h3>Projects</h3>
+            <p>Project documents & work in progress</p>
+          </div>
+
+          <div>
+            <hr />
+            <p>FOLDER 03</p>
+            <h3>Experience</h3>
+            <p>Work, education & the next chapter</p>
+          </div>
+
+          <div>
+            <hr />
+            <p>FOLDER 04</p>
+            <h3>Contact</h3>
+            <p>A new conversation starts here</p>
+          </div>
         </div>
 
-        <div>
-          <hr />
-          <p>FOLDER 03</p>
-          <h2>Experience</h2>
-          <p>Work, education & the next chapter</p>
-        </div>
+        <aside>
+          <!-- Image below must be right-aligned -->
+          <div>
+            <img src="path/to/image.jpg" alt="Description of image" />
+          </div>
+        </aside>
 
-        <div>
-          <hr />
-          <p>FOLDER 04</p>
-          <h2>Contact</h2>
-          <p>A new conversation starts here</p>
-        </div>
+        <footer>
+          <p>YOFIEL TE · PERSONAL CAREER ARCHIVE / END OF FILE 01</p>
+        </footer>
       </section>
 
-      <aside>
-        <!-- Image below must be right-aligned -->
-        <div>
-          <img src="path/to/image.jpg" alt="Description of image" />
-        </div>
-      </aside>
+      <!-- Projects section -->
+      <section id="projects">
+        <p>PERSONAL ARCHIVE / 02</p>
+        <h2>Project files.</h2>
+        <p>A place for the work I'm building.</p>
+        <!--Counts the number of projects-->
+        <p>00 PROJECTS</p>
 
-      <footer>
-        <p>YOFIEL TE · PERSONAL CAREER ARCHIVE / END OF FILE 01</p>
-      </footer>
+        <div class="project-container">
+          <div class="project-item">
+            <p>Project Title</p>
+            <img
+              src="path/to/project-image.jpg"
+              alt="Description of project image"
+            />
+            <h3>Project Title</h3>
+            <p>Project description goes here.</p>
+            <a href="path/to/project-link.html"
+              ><button>View Project</button></a
+            >
+          </div>
+          <!-- Additional project items can go here -->
+        </div>
+
+        <footer>
+          <p>YOFIEL TE · PERSONAL CAREER ARCHIVE / END OF FILE 02</p>
+        </footer>
+      </section>
+
+      <!-- Experience section -->
+      <section id="experience">
+        <p>PERSONAL ARCHIVE / 03</p>
+        <h2>The file history.</h2>
+        <p>
+          Work, education and space for what comes next. A continuous record,
+          one chapter at a time.
+        </p>
+
+        <div>
+          <p>HISTORY / INDEX</p>
+
+          <a href="">Work Experience</a>
+          <a href="">Education</a>
+
+          <img src="" alt="" />
+        </div>
+
+        <!-- Add timeline graphic for the experience section -->
+        <aside class="timeline">
+          <p>2025 - PRESENT</p>
+          <h3>Guest Service Representative</h3>
+          <p>Extended Stay America / Hospitality Experience</p>
+          <p>
+            Responsibilities include assisting guests with check-in and
+            check-out processes, providing information about hotel services, and
+            ensuring a positive guest experience.
+          </p>
+          <p>
+            Skills developed: Customer service, communication, problem-solving,
+            and teamwork.
+          </p>
+
+          <p>EDUCATION / AUGUST 2026 - PRESENT</p>
+          <h3>Information Systems Technology College Student</h3>
+          <p>Seminole State College of Florida</p>
+          <p>
+            Coursework includes studying information systems, software
+            development, and technology management.
+          </p>
+          <p>
+            Skills developed: Analytical thinking, problem-solving, technical
+            proficiency, and teamwork.
+          </p>
+
+          <p>EDUCATION / 2022 - 2024</p>
+          <h3>Information & Communications Technology High School Student</h3>
+          <p>Holy Trinity Academy, Philippines</p>
+          <p>
+            Coursework includes studying information & communications
+            technology, including networking, software applications, and digital
+            literacy.
+          </p>
+        </aside>
+
+        <footer>
+          <p>YOFIEL TE · PERSONAL CAREER ARCHIVE / END OF FILE 02</p>
+        </footer>
+      </section>
+
+      <!-- Contact section -->
+      <section id="contact">
+        <p>PERSONAL ARCHIVE / 04</p>
+        <h2>Let's connect.</h2>
+        <p>Have a question or an opportunity in mind? Start a conversation.</p>
+
+        <p>GET IN TOUCH</p>
+
+        <hr>
+        <p>EMAIL</p>
+        <a href="mailto:te.yofiel@gmail.com" target="_blank">My email address</a>
+        <hr>
+        <p>LINKEDIN</p>
+        <a href="https://www.linkedin.com/in/te-yofiel" target="_blank">My LinkedIn Profile</a>
+        <hr>
+        <p>GITHUB</p>
+        <a href="https://github.com/Exaelll" target="_blank">My GitHub Profile</a>
+
+      </section>
     </main>
 
     <footer>
