@@ -42,14 +42,15 @@ hr {
     color: #ffffff;
 }
 
-.right-aligned {
+.right-aligned p {
     margin-left: auto;
     text-align: right;
     margin: 0;
 }
 
-.left-aligned {
+.left-aligned p:first-child {
     text-align: left;
+    margin: 0;
 }
 
 .spacer-left,
@@ -76,28 +77,34 @@ hr {
 
 .folder-tab-group {
     display: flex;
-    justify-content: space-between;
+    gap: 10px;
     list-style: none;
-    width:relative;
-    gap:10px;
+    width: 100%;
     border-bottom: 1px solid #d8b39b;
+}
+
+.folder-tab-group li {
+    flex: 1 1 0;
+    /* equal widths, allowed to shrink */
+    min-width: 0;
+    /* lets the li shrink below its content width */
 }
 
 .folder-tab {
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
+    width: 100%;
+    /* fill the li instead of using vw */
+    min-height: 5vh;
+    padding: 0 8px;
     text-align: center;
-    flex: 1;
-    list-style: none;
     text-decoration: none;
     background-color: #d8c49b;
     color: #252f34;
-    height: 5vh;
-    width: 21vw;
-    min-width:0;
     border-radius: 4px 4px 0 0;
+    font-size: clamp(10px, 1.2vw, 14px);
+    /* optional: shrink text with the window */
 }
 
 .folder {
@@ -147,7 +154,7 @@ hr {
     background-color: #f8f5ed;
     padding: 15px 15px 45px 15px;
     rotate: 5deg;
-    margin: 20px;
+    margin: 10px 10px 40px 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
 }
 
@@ -170,23 +177,28 @@ hr {
     background-color: #2c4a5a;
 }
 
-.home-details p {
+.home-details {
     margin: 23px 0;
 }
 
-        .additional-nav {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 40px;
-            gap: 15px;
-        }
+.additional-nav {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 40px;
+    gap: 15px;
+}
 
-        .additional-nav-items {
-            display: flex;
-            flex-direction: column;
-            flex: 1;
-            min-width: 0;
-        }
+.additional-nav-items hr {
+    margin-top: 17px;
+    margin-bottom: 40px;
+}
+
+.additional-nav-items {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 0;
+}
 
 .additional-nav-items h3 {
     font-size: 1.6em;
