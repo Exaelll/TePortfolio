@@ -224,39 +224,60 @@
             Have a question or an opportunity in mind? Start a conversation.
           </p>
 
-          <p>GET IN TOUCH</p>
+          <div class="contact-layout">
 
-          <hr />
-          <p>EMAIL</p>
-          <a href="mailto:te.yofiel@gmail.com" target="_blank">My email address</a>
-          <hr />
-          <p>LINKEDIN</p>
-          <a href="https://www.linkedin.com/in/te-yofiel" target="_blank">My LinkedIn Profile</a>
-          <hr />
-          <p>GITHUB</p>
-          <a href="https://github.com/Exaelll" target="_blank">My GitHub Profile</a>
+            <!-- Left: contact links -->
+            <div class="contact-info">
+              <p class="contact-heading">GET IN TOUCH</p>
 
+              <div class="contact-item">
+                <p class="contact-label">EMAIL</p>
+                <a class="contact-link" href="mailto:te.yofiel@gmail.com">My email address <span
+                    aria-hidden="true">↗</span></a>
+              </div>
 
-          <div class="contact-form">
-            <form action="">
-              <label for="name">Name:</label>
-              <input type="text" id="name" name="name" required>
+              <div class="contact-item">
+                <p class="contact-label">LINKEDIN</p>
+                <a class="contact-link" href="https://www.linkedin.com/in/te-yofiel" target="_blank" rel="noopener">My
+                  LinkedIn URL <span aria-hidden="true">↗</span></a>
+              </div>
 
-              <label for="email">Email:</label>
-              <input type="email" id="email" name="email" required>
+              <div class="contact-item">
+                <p class="contact-label">GITHUB</p>
+                <a class="contact-link" href="https://github.com/Exaelll" target="_blank" rel="noopener">My GitHub URL
+                  <span aria-hidden="true">↗</span></a>
+              </div>
+            </div>
 
-              <label for="message">Message:</label>
-              <textarea id="message" name="message" rows="4" required></textarea>
+            <!-- Right: form card -->
+            <aside class="contact-form">
+              <form action="">
+                <p class="blue-label">CORRESPONDENCE / NEW MESSAGE</p>
 
-              <button type="submit">Send</button>
-            </form>
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" placeholder="Your name" required>
+
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Your email address" required>
+
+                <label for="message">Message</label>
+                <textarea id="message" name="message" rows="4" placeholder="What would you like to talk about?"
+                  required></textarea>
+
+                <button class="form-submit" type="submit">Submit <span aria-hidden="true">↗</span></button>
+
+              </form>
+            </aside>
+
           </div>
+          <!-- Close contact-layout -->
 
           <footer>
             <p>YOFIEL TE · PERSONAL CAREER ARCHIVE / END OF FILE 04</p>
           </footer>
 
-        </div> <!-- Close folder-content -->
+        </div>
+        <!-- Close folder-content -->
       </section>
 
 

@@ -138,7 +138,7 @@ hr {
 .folder-content {
     background-color: #F8F5ED;
     padding: 40px;
-    border-radius: 8px;
+    border-radius: 4px;
 }
 
 .content-title {
@@ -146,6 +146,8 @@ hr {
     font-weight: bold;
     margin-bottom: 20px;
 }
+
+
 
 /* Home Folder */
 .folder-home {
@@ -249,7 +251,7 @@ hr {
     }
 
     .project-item {
-        background-color: #ede7da;
+        background-color: #F8F5ED;
         padding: 20px;
         min-width: 24vw;
         max-width: 100vw;
@@ -274,7 +276,7 @@ hr {
         width: 100%;
         height: 4vh;
         border: 1px solid lightgray;
-        background-color: #ede7da;
+        background-color: #F8F5ED;
         color: #365D72;
         text-decoration: none;
         border-radius: 4px;
@@ -282,12 +284,13 @@ hr {
     }
 
     .viewProjectBtn:hover {
-        background-color: #ddd8cd;
-        font-size: 1.2em;
+        background-color: #eceae2;
+        font-size: 1.1em;
     }
 
 }
 
+/* Experience Folder */
 .folder-experience {
 
     /* ---------- Layout ---------- */
@@ -439,10 +442,144 @@ hr {
 
 }
 
+/* Contact Folder */
+.folder-contact {
+
+    /* ---------- Layout ---------- */
+    .contact-layout {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 56px;
+        align-items: start;
+        margin: 40px 0;
+    }
+
+    /* ---------- Left column ---------- */
+    .contact-heading {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.85em;
+        color: #505050;
+        margin-bottom: 20px;
+    }
+
+    .contact-item {
+        border-top: 1px solid #cfc8b9;
+        padding-top: 16px;
+        padding-bottom: 100px;
+    }
+
+    .contact-label {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.8em;
+        color: #505050;
+        margin-bottom: 6px;
+    }
+
+    .contact-link {
+        color: #365d72;
+        text-decoration: underline;
+        text-underline-offset: 4px;
+        text-decoration-thickness: 1px;
+        font-size: 1.05em;
+        transition: color 0.3s ease;
+    }
+
+    .contact-link:hover {
+        color: #2c4a5a;
+    }
+
+    /* ---------- Form card ---------- */
+    .contact-form {
+        background-color: #F8F5ED;
+        border: 1px solid #cfc8b9;
+        padding: 24px;
+    }
+
+    .contact-form .blue-label {
+        font-size: 0.8em;
+        margin-bottom: 20px;
+    }
+
+    .contact-form label {
+        display: block;
+        font-weight: 500;
+        color: #252f34;
+        margin: 18px 0 8px;
+    }
+
+    input,
+    textarea {
+        display: block;
+        width: 100%;
+        padding: 0 14px;
+        background-color: #F8F5ED;
+        border: 1px solid #cfc8b9;
+        border-radius: 4px;
+        color: #252f34;
+    }
+
+    input {
+        height: 46px;
+    }
+
+    textarea {
+        height: 125px;
+        padding-top: 14px;
+        resize: vertical;
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+        color: #6b6b6b;
+    }
+
+    input:focus,
+    textarea:focus {
+        outline: none;
+        border-color: #365d72;
+    }
+
+    .form-submit {
+        margin-top: 20px;
+        height: 43px;
+        padding: 0 22px;
+        background-color: #365d72;
+        color: #ffffff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.85em;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .form-submit:hover {
+        background-color: #2c4a5a;
+        transform: scale(1.02);
+    }
+
+    /* ---------- Mobile ---------- */
+    @media (max-width: 900px) {
+        .contact-layout {
+            grid-template-columns: 1fr;
+            gap: 40px;
+        }
+
+        .contact-item {
+            padding-bottom: 40px;
+        }
+    }
+}
+
+
 
 footer p {
     font-family: "IBM Plex Mono", monospace;
     margin: 0;
+}
+
+footer p:last-child {
+    margin-top: 40px;
 }
 
 .drawer-face {
