@@ -176,6 +176,11 @@ hr {
         rotate: 5deg;
         margin: 10px 10px 40px 20px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+        transition: box-shadow 0.3s ease, transform 0.3s ease;
+    }
+    .photo:hover {
+        transform: scale(1.02);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
     }
 
     .photo img {
@@ -230,6 +235,10 @@ hr {
         margin: 0;
         margin-bottom: 15px;
         font-weight: bold;
+        transition: transform 0.3s ease;
+    }
+    .additional-nav-items a:hover {
+        transform: translateX(5px);
     }
 
     .additional-nav-items p {
@@ -259,6 +268,12 @@ hr {
         border: 1px solid lightgray;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         flex: 1 1 calc(33% - 20px);
+        transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    }
+    .project-item:hover {
+        background-color: #f7f6f3;
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
     }
 
     .project-item img {
@@ -572,53 +587,50 @@ hr {
 }
 
 /* Footer Cabinet */
-footer-cabinet {
-    footer p {
-        font-family: "IBM Plex Mono", monospace;
-        margin: 0;
-    }
+.folder-content > footer p {
+    font-family: "IBM Plex Mono", monospace;
+    margin: 0;
+}
 
-    footer p:last-child {
-        margin-top: 40px;
-    }
+.folder-content > footer {
+    margin-top: 40px;
+}
 
-    .drawer-face {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background: linear-gradient(to bottom, #676f74, #555c60);
-        padding: 20px;
-        margin: 10px;
-        text-align: center;
-        border-radius: 4px;
-        border: 1px solid gray;
-    }
+.drawer-face {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to bottom, #676f74, #555c60);
+    padding: 20px;
+    margin: 10px;
+    text-align: center;
+    border-radius: 4px;
+    border: 1px solid gray;
+}
 
-    .drawer-handle {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        background-color: #252c30;
-        width: 30vw;
-        padding: 19px;
-        border-radius: 8px;
-        border: 1px solid gray;
-        text-align: center;
-        cursor: pointer;
-    }
+.drawer-handle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #252c30;
+    width: 30vw;
+    padding: 19px;
+    border-radius: 8px;
+    border: 1px solid gray;
+    text-align: center;
+    cursor: pointer;
+}
 
-    .drawer-handle hr {
-        margin: 8px;
-        margin-bottom: 0;
-        width: 16vw;
-    }
+.drawer-handle hr {
+    margin: 0px;
+    width: 16vw;
+}
 
-    .drawer-handle p {
-        background-color: #ede7da;
-        padding: 1vh 3vw;
-        border-radius: 2px;
-    }
+.drawer-handle p {
+    background-color: #ede7da;
+    padding: 1vh 3vw;
+    border-radius: 2px;
 }
 
 /* ================= Folder animation ================= */
