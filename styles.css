@@ -201,17 +201,6 @@ hr {
         height: 100%;
     }
 
-    .exploreProjectsBtn {
-        display: inline-block;
-        padding: 20px 20px;
-        background-color: var(--color-blue);
-        color: #ffffff;
-        text-decoration: none;
-        border-radius: 4px;
-        transition: background-color 0.3s ease, padding 0.3s ease;
-        font-family: var(--font-mono);
-    }
-
     .exploreProjectsBtn:hover {
         padding: 22px 22px;
         background-color: #2c4a5a;
@@ -637,7 +626,7 @@ hr {
     flex-direction: column;
     background-color: #252c30;
     width: 30vw;
-    padding: 19px;
+    padding: 15px;
     border-radius: 8px;
     border: 1px solid gray;
     text-align: center;
