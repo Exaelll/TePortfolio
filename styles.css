@@ -128,7 +128,7 @@ hr {
 
 .folder {
     background-color: #d8c49b;
-    min-height: 100vh;
+    min-height: 0;
     position: relative;
     padding: 30px;
     border-bottom-left-radius: 4px;
@@ -571,51 +571,175 @@ hr {
     }
 }
 
+/* Footer Cabinet */
+footer-cabinet {
+    footer p {
+        font-family: "IBM Plex Mono", monospace;
+        margin: 0;
+    }
 
+    footer p:last-child {
+        margin-top: 40px;
+    }
 
-footer p {
-    font-family: "IBM Plex Mono", monospace;
-    margin: 0;
+    .drawer-face {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient(to bottom, #676f74, #555c60);
+        padding: 20px;
+        margin: 10px;
+        text-align: center;
+        border-radius: 4px;
+        border: 1px solid gray;
+    }
+
+    .drawer-handle {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        background-color: #252c30;
+        width: 30vw;
+        padding: 19px;
+        border-radius: 8px;
+        border: 1px solid gray;
+        text-align: center;
+        cursor: pointer;
+    }
+
+    .drawer-handle hr {
+        margin: 8px;
+        margin-bottom: 0;
+        width: 16vw;
+    }
+
+    .drawer-handle p {
+        background-color: #ede7da;
+        padding: 1vh 3vw;
+        border-radius: 2px;
+    }
 }
 
-footer p:last-child {
-    margin-top: 40px;
-}
+/* ================= Folder animation ================= */
 
-.drawer-face {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: linear-gradient(to bottom, #676f74, #555c60);
-    padding: 20px;
-    margin: 10px;
-    text-align: center;
-    border-radius: 4px;
-    border: 1px solid gray;
-}
 
-.drawer-handle {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    background-color: #252c30;
-    width: 30vw;
-    padding: 19px;
-    border-radius: 8px;
-    border: 1px solid gray;
-    text-align: center;
-    cursor: pointer;
-}
+    /* ---------- Tabs: selected tab raised + brighter ---------- */
+    .folder-tab-group {
+        align-items: flex-end;
+    }
 
-.drawer-handle hr {
-    margin: 8px;
-    margin-bottom: 0;
-    width: 16vw;
-}
+    .folder-tab {
+        background-color: #bfa882;
+        transition: background-color 0.42s cubic-bezier(0.22, 1, 0.36, 1),
+            min-height 0.42s cubic-bezier(0.22, 1, 0.36, 1);
+    }
 
-.drawer-handle p {
-    background-color: #ede7da;
-    padding: 1vh 3vw;
-    border-radius: 2px;
-}
+    .folder-tab:hover {
+        background-color: #cdb78e;
+    }
+
+    .folder-tab[aria-current="true"] {
+        background-color: #d8c49b;
+        min-height: calc(5vh + 8px);
+        font-weight: 600;
+    }
+
+    .folder-tab:focus-visible {
+        outline: 2px solid #365d72;
+        outline-offset: 2px;
+    }
+
+    /* ---------- Stack: folders sit on top of each other ---------- */
+    .js .folder-stack {
+        position: relative;
+        overflow: clip;
+        /* clips the fold; doesn't break sticky like overflow:hidden would */
+    }
+
+    /* slim paper edge left beneath the active folder */
+    .js .folder-stack::after {
+        content: "";
+        display: block;
+        height: 8px;
+        margin: 0 8px;
+        background-color: #b49d75;
+        border-radius: 0 0 4px 4px;
+    }
+
+    .js .folder {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transform-origin: 50% 0;
+        /* pivot at the upper/back edge */
+    }
+
+    /* the folder being read, and the one being revealed, stay in flow */
+    .js .folder.is-active,
+    .js .folder.is-incoming {
+        position: relative;
+        visibility: visible;
+        pointer-events: auto;
+    }
+
+    /* the folder folding away stays visible until the animation ends */
+    .js .folder.is-outgoing {
+        visibility: visible;
+    }
+
+    .js .folder.is-front {
+        z-index: 3;
+    }
+
+    .js .folder.is-back {
+        z-index: 2;
+    }
+
+    .folder:focus {
+        outline: none;
+    }
+
+    /* ---------- History emphasis (Experience folder) ---------- */
+    .folder-experience .history-index a {
+        position: relative;
+        transition: color 0.3s ease;
+    }
+
+    .folder-experience .history-index a.is-current {
+        font-weight: 600;
+        color: #365d72;
+    }
+
+    .folder-experience .history-index a.is-current::before {
+        content: "";
+        position: absolute;
+        left: -14px;
+        top: 0.45em;
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background-color: #365d72;
+    }
+
+    .folder-experience .timeline-item::before {
+        transition: box-shadow 0.3s ease;
+    }
+
+    .folder-experience .timeline-item.is-current::before {
+        box-shadow: 0 0 0 4px rgba(54, 93, 114, 0.2);
+    }
+
+    /* ---------- Reduced motion ---------- */
+    @media (prefers-reduced-motion: reduce) {
+        html {
+            scroll-behavior: auto;
+        }
+
+        .folder-tab {
+            transition: none;
+        }
+    }

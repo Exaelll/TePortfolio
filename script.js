@@ -1,0 +1,265 @@
+(() => {
+  const folders = [...document.querySelectorAll('.folder')];
+  const tabs    = [...document.querySelectorAll('.folder-tab')];
+  const stack   = document.querySelector('.folder-stack');
+  const nav     = document.querySelector('.drawer nav');
+  if (!folders.length || !stack || !nav) return;
+
+  /* ---------- Spec values from the design sheet ---------- */
+  const DURATION = 420;                          // ms
+  const EASING   = 'cubic-bezier(0.22, 1, 0.36, 1)';
+  const PITCH    = -68;                          // deg, fall forward toward the viewer
+  const SCALE    = 0.98;                         // 1.00 -> 0.98
+
+  /* Scroll-to-advance: must rest at the edge, then keep scrolling */
+  const EDGE_DWELL    = 400;                     // ms at the edge before advancing is allowed
+  const OVERSCROLL_PX = 160;                     // extra wheel distance needed
+
+  const reduceQuery = matchMedia('(prefers-reduced-motion: reduce)');
+  const mobileQuery = matchMedia('(max-width: 900px)');
+
+  let active  = null;
+  let busy    = false;
+  let pending = null;
+
+  /* ---------- Helpers ---------- */
+  const folderFor = (id) => {
+    const el = id ? document.getElementById(id) : null;
+    return el ? el.closest('.folder') : null;
+  };
+
+  const setActiveTab = (id) => {
+    tabs.forEach((t) => {
+      if (t.getAttribute('href') === '#' + id) t.setAttribute('aria-current', 'true');
+      else t.removeAttribute('aria-current');
+    });
+  };
+
+  const setHash = (id) => {
+    if (location.hash !== '#' + id) history.pushState(null, '', '#' + id);
+  };
+
+  // Bring the tabs into view before a transition so the fold is visible
+  const revealNav = () => {
+    const top = nav.getBoundingClientRect().top;
+    if (top < 0) window.scrollTo({ top: window.scrollY + top - 12, behavior: 'instant' });
+  };
+
+  /* ---------- Keyframes ---------- */
+  // Home pitches forward and down, shadow broadens, then it settles away
+  const foldFrames = (H, S) => {
+    const rad    = (PITCH * Math.PI) / 180;
+    const N      = Math.max(1800, H * 3);                         // perspective distance
+    const squash = Math.cos(rad) * N / (N - H * Math.sin(rad));   // folded height incl. perspective
+    const shift  = Math.max(0, S - H * squash);                   // drop it to the bottom of the drawer
+    return [
+      {
+        transform: `translateY(0) perspective(${N}px) rotateX(0deg) scale(1)`,
+        boxShadow: '0 0 0 rgba(0,0,0,0)',
+        opacity: 1,
+        offset: 0
+      },
+      { opacity: 1, offset: 0.8 },
+      {
+        transform: `translateY(${shift}px) perspective(${N}px) rotateX(${PITCH}deg) scale(${SCALE})`,
+        boxShadow: '0 30px 60px rgba(0,0,0,0.35)',
+        opacity: 0,
+        offset: 1
+      }
+    ];
+  };
+
+  // The folder underneath rises into the reading plane
+  const settleFrames = [
+    { transform: `scale(${SCALE})`, filter: 'brightness(0.88)' },
+    { transform: 'scale(1)',        filter: 'brightness(1)' }
+  ];
+
+  /* ---------- Transitions ---------- */
+  function afterSwitch(to, hadFocus) {
+    resetEdge();
+    updateHistory();
+    if (hadFocus) {                       // keep keyboard focus in the new folder
+      to.tabIndex = -1;
+      to.focus({ preventScroll: true });
+    }
+  }
+
+  // Reduced motion: instant. Mobile: short opacity fade.
+  function swap(from, to, fade) {
+    const hadFocus = from.contains(document.activeElement);
+    from.classList.remove('is-active');
+    to.classList.add('is-active');
+    active = to;
+    if (fade) to.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 160, easing: 'ease-out' });
+    afterSwitch(to, hadFocus);
+  }
+
+  // Desktop: the fold
+  function fold(from, to) {
+    busy = true;
+    const hadFocus = from.contains(document.activeElement);
+    const forward  = folders.indexOf(to) > folders.indexOf(from);
+
+    from.classList.remove('is-active');
+    from.classList.add('is-outgoing', forward ? 'is-front' : 'is-back');
+    to.classList.add('is-incoming',   forward ? 'is-back'  : 'is-front');
+
+    const S    = stack.offsetHeight;
+    const H    = (forward ? from : to).offsetHeight;
+    const opts = { duration: DURATION, easing: EASING, fill: 'both' };
+    const rev  = { ...opts, direction: 'reverse' };
+
+    // Forward:  current folds away, next settles up.
+    // Backward: target unfolds back into view, current settles down.
+    const anims = forward
+      ? [from.animate(foldFrames(H, S), opts), to.animate(settleFrames, opts)]
+      : [to.animate(foldFrames(H, S), rev),    from.animate(settleFrames, rev)];
+
+    Promise.allSettled(anims.map((a) => a.finished)).then(() => {
+      anims.forEach((a) => a.cancel());
+      from.classList.remove('is-outgoing', 'is-front', 'is-back');
+      to.classList.remove('is-incoming', 'is-front', 'is-back');
+      to.classList.add('is-active');
+      active = to;
+      busy = false;
+      afterSwitch(to, hadFocus);
+
+      if (pending) {
+        const p = pending;
+        pending = null;
+        goTo(p.id, p.push);
+      }
+    });
+  }
+
+  function goTo(id, push = true) {
+    const to = folderFor(id);
+    if (!to) return;
+    if (busy) { pending = { id: to.id, push }; return; }
+    if (push) setHash(to.id);
+    if (to === active) return;
+
+    revealNav();
+    setActiveTab(to.id);
+
+    if (reduceQuery.matches)      swap(active, to, false);
+    else if (mobileQuery.matches) swap(active, to, true);
+    else                          fold(active, to);
+  }
+
+  /* ---------- Tab + in-page folder links ---------- */
+  document.addEventListener('click', (e) => {
+    if (e.defaultPrevented || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+    const a = e.target.closest('a[href^="#"]');
+    if (!a) return;
+    const id = a.getAttribute('href').slice(1);
+    const folder = folderFor(id);
+    // Only folder links animate; links to items inside a folder scroll normally
+    if (folder && folder.id === id) {
+      e.preventDefault();
+      goTo(id);
+    }
+  });
+
+  /* ---------- Back / forward / manual hash edits ---------- */
+  const fromHash = () => {
+    const f = folderFor(location.hash.slice(1)) || (location.hash ? null : folders[0]);
+    if (f) goTo(f.id, false);
+  };
+  window.addEventListener('hashchange', fromHash);
+  window.addEventListener('popstate', fromHash);
+
+  /* ---------- Scroll to advance (desktop only) ---------- */
+  const edgeOf = () => {
+    if (window.scrollY <= 0) return -1;
+    if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2) return 1;
+    return 0;
+  };
+
+  let edge = edgeOf();
+  let edgeSince = performance.now();
+  let overscroll = 0;
+  let lastWheel = 0;
+
+  function resetEdge() {
+    edge = edgeOf();
+    edgeSince = performance.now();
+    overscroll = 0;
+  }
+
+  window.addEventListener('scroll', () => {
+    const e = edgeOf();
+    if (e !== edge) {
+      edge = e;
+      edgeSince = performance.now();
+      overscroll = 0;
+    }
+  }, { passive: true });
+
+  window.addEventListener('wheel', (e) => {
+    if (busy || e.ctrlKey || reduceQuery.matches || mobileQuery.matches) return;
+
+    const dir = e.deltaY > 0 ? 1 : -1;
+    if (dir !== edge) { overscroll = 0; return; }       // not resting at that edge
+
+    const now = performance.now();
+    if (now - edgeSince < EDGE_DWELL) return;           // let momentum scrolling settle first
+    if (now - lastWheel > 300) overscroll = 0;          // treat a pause as a new gesture
+    lastWheel = now;
+    overscroll += Math.abs(e.deltaY);
+
+    if (overscroll >= OVERSCROLL_PX) {
+      overscroll = 0;
+      const next = folders[folders.indexOf(active) + dir];
+      if (next) goTo(next.id);
+    }
+  }, { passive: true });
+
+  /* ---------- History emphasis: work -> education -> future records ---------- */
+  const items = [...document.querySelectorAll('.timeline-item')];
+  const indexLinks = new Map(
+    items.map((it) => [it, document.querySelector(`.history-index a[href="#${it.id}"]`)])
+  );
+
+  function setCurrent(current) {
+    items.forEach((it) => {
+      const on = it === current;
+      it.classList.toggle('is-current', on);
+      const link = indexLinks.get(it);
+      if (link) link.classList.toggle('is-current', on);
+    });
+  }
+
+  function updateHistory() {
+    if (!items.length) return;
+    const exp = document.getElementById('experience');
+    if (!exp || !(exp.classList.contains('is-active') || exp.classList.contains('is-incoming'))) return;
+    const line = window.innerHeight * 0.4;
+    let current = items[0];
+    items.forEach((it) => {
+      if (it.getBoundingClientRect().top <= line) current = it;
+    });
+    setCurrent(current);
+  }
+
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => { updateHistory(); ticking = false; });
+  }, { passive: true });
+
+  /* ---------- Init ---------- */
+  const hashId = location.hash.slice(1);
+  const start  = folderFor(hashId) || folders[0];
+  start.classList.add('is-active');
+  active = start;
+  setActiveTab(start.id);
+
+  const inner = hashId && document.getElementById(hashId);
+  if (inner && inner !== start) inner.scrollIntoView();
+
+  updateHistory();
+  resetEdge();
+})();
