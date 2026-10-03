@@ -5,7 +5,7 @@
   const nav     = document.querySelector('.drawer nav');
   if (!folders.length || !stack || !nav) return;
 
-  /* ---------- Spec values from the design sheet ---------- */
+  /* ---------- Configuration ---------- */
   const DURATION = 420;                          // ms
   const EASING   = 'cubic-bezier(0.22, 1, 0.36, 1)';
   const PITCH    = -68;                          // deg, fall forward toward the viewer
@@ -14,6 +14,7 @@
   /* Scroll-to-advance: must rest at the edge, then keep scrolling */
   const EDGE_DWELL    = 400;                     // ms at the edge before advancing is allowed
   const OVERSCROLL_PX = 160;                     // extra wheel distance needed
+  const TIMELINE_TARGET_POSITION = 0.3;          // keep selected entry above the history marker line
 
   const reduceQuery = matchMedia('(prefers-reduced-motion: reduce)');
   const mobileQuery = matchMedia('(max-width: 900px)');
@@ -21,8 +22,9 @@
   let active  = null;
   let busy    = false;
   let pending = null;
+  let pendingTimelineId = null;
 
-  /* ---------- Helpers ---------- */
+  /* ---------- Folder and navigation helpers ---------- */
   const folderFor = (id) => {
     const el = id ? document.getElementById(id) : null;
     return el ? el.closest('.folder') : null;
@@ -45,7 +47,16 @@
     if (top < 0) window.scrollTo({ top: window.scrollY + top - 12, behavior: 'instant' });
   };
 
-  /* ---------- Keyframes ---------- */
+  const scrollToTimelineItem = (target) => {
+    const targetTop = target.getBoundingClientRect().top;
+    const targetPosition = window.innerHeight * TIMELINE_TARGET_POSITION;
+    window.scrollTo({
+      top: window.scrollY + targetTop - targetPosition,
+      behavior: 'smooth'
+    });
+  };
+
+  /* ---------- Folder animation ---------- */
   // Home pitches forward and down, shadow broadens, then it settles away
   const foldFrames = (H, S) => {
     const rad    = (PITCH * Math.PI) / 180;
@@ -75,10 +86,18 @@
     { transform: 'scale(1)',        filter: 'brightness(1)' }
   ];
 
-  /* ---------- Transitions ---------- */
+  /* ---------- Folder switching ---------- */
   function afterSwitch(to, hadFocus) {
     resetEdge();
     updateHistory();
+    if (to.id === 'experience' && pendingTimelineId) {
+      const timelineId = pendingTimelineId;
+      pendingTimelineId = null;
+      requestAnimationFrame(() => {
+        const timelineTarget = document.getElementById(timelineId);
+        if (timelineTarget) scrollToTimelineItem(timelineTarget);
+      });
+    }
     if (hadFocus) {                       // keep keyboard focus in the new folder
       to.tabIndex = -1;
       to.focus({ preventScroll: true });
@@ -148,12 +167,32 @@
     else                          fold(active, to);
   }
 
-  /* ---------- Tab + in-page folder links ---------- */
+  function goToTimelineItem(id) {
+    const target = document.getElementById(id);
+    const experience = document.getElementById('experience');
+    if (!target || !experience) return;
+
+    setHash(id);
+    if (active === experience) {
+      scrollToTimelineItem(target);
+      return;
+    }
+
+    pendingTimelineId = id;
+    goTo('experience', false);
+  }
+
+  /* ---------- Tab and in-page folder navigation ---------- */
   document.addEventListener('click', (e) => {
     if (e.defaultPrevented || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
     const a = e.target.closest('a[href^="#"]');
     if (!a) return;
     const id = a.getAttribute('href').slice(1);
+    if (a.closest('.history-index')) {
+      e.preventDefault();
+      goToTimelineItem(id);
+      return;
+    }
     const folder = folderFor(id);
     // Only folder links animate; links to items inside a folder scroll normally
     if (folder && folder.id === id) {
@@ -162,15 +201,27 @@
     }
   });
 
-  /* ---------- Back / forward / manual hash edits ---------- */
+  /* ---------- Browser history and hash navigation ---------- */
   const fromHash = () => {
-    const f = folderFor(location.hash.slice(1)) || (location.hash ? null : folders[0]);
-    if (f) goTo(f.id, false);
+    const id = location.hash.slice(1);
+    const f = folderFor(id) || (location.hash ? null : folders[0]);
+    if (!f) return;
+    if (f.id === 'experience' && id !== f.id) {
+      if (active === f) {
+        const timelineTarget = document.getElementById(id);
+        if (timelineTarget) scrollToTimelineItem(timelineTarget);
+        return;
+      }
+      pendingTimelineId = id;
+      goTo(f.id, false);
+      return;
+    }
+    goTo(f.id, false);
   };
   window.addEventListener('hashchange', fromHash);
   window.addEventListener('popstate', fromHash);
 
-  /* ---------- Scroll to advance (desktop only) ---------- */
+  /* ---------- Scroll-to-advance navigation ---------- */
   const edgeOf = () => {
     if (window.scrollY <= 0) return -1;
     if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2) return 1;
@@ -216,7 +267,7 @@
     }
   }, { passive: true });
 
-  /* ---------- History emphasis: work -> education -> future records ---------- */
+  /* ---------- Experience timeline highlighting ---------- */
   const items = [...document.querySelectorAll('.timeline-item')];
   const indexLinks = new Map(
     items.map((it) => [it, document.querySelector(`.history-index a[href="#${it.id}"]`)])
@@ -242,7 +293,35 @@
     });
     setCurrent(current);
   }
+  /* ---------- Project count ---------- */
+  function updateProjectCount() {
+    const projectContainer = document.querySelector('.project-container');
+    const projectCount = document.getElementById('project-count');
+    if (!projectContainer || !projectCount) return;
 
+    const count = projectContainer.querySelectorAll('.project-item').length;
+    projectCount.textContent = `${String(count).padStart(2, '0')} PROJECTS`;
+  }
+
+  /* ---------- Contact form email ---------- */
+  const contactForm = document.getElementById('contact-form');
+  if (contactForm) {
+    contactForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+      if (!contactForm.reportValidity()) return;
+
+      const formData = new FormData(contactForm);
+      const name = String(formData.get('name') || '').trim();
+      const email = String(formData.get('email') || '').trim();
+      const message = String(formData.get('message') || '').trim();
+      const subject = `Portfolio message from ${name}`;
+      const body = `Name: ${name}\nEmail: ${email}\n\n${message}`;
+
+      window.location.href = `mailto:yofiel1te@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    });
+  }
+
+  /* ---------- Shared scroll updates ---------- */
   let ticking = false;
   window.addEventListener('scroll', () => {
     if (ticking) return;
@@ -250,7 +329,13 @@
     requestAnimationFrame(() => { updateHistory(); ticking = false; });
   }, { passive: true });
 
-  /* ---------- Init ---------- */
+  /* ---------- Project count updates ---------- */
+  const projectContainer = document.querySelector('.project-container');
+  if (projectContainer) {
+    new MutationObserver(updateProjectCount).observe(projectContainer, { childList: true });
+  }
+
+  /* ---------- Initial state ---------- */
   const hashId = location.hash.slice(1);
   const start  = folderFor(hashId) || folders[0];
   start.classList.add('is-active');
@@ -261,5 +346,6 @@
   if (inner && inner !== start) inner.scrollIntoView();
 
   updateHistory();
+  updateProjectCount();
   resetEdge();
 })();

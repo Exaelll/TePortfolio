@@ -1,16 +1,16 @@
-<html>
+<html lang="en">
 
 <head>
   <title>Yofiel Portfolio</title>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Yofiel Te's career portfolio and personal archive." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" />
   <link rel="stylesheet" href="styles.css" />
   <link rel="icon" href="favicon.ico" />
-
-  <!--Font Styles-->
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
-  </style>
 
   <script>document.documentElement.classList.add('js');</script>
 </head>
@@ -19,23 +19,22 @@
 
   <main class="cabinet">
 
-    <header>
-      <span class="left-aligned">
+    <header class="cabinet-header">
+      <div class="left-aligned">
         <p>YOFIEL TE / PERSONAL ARCHIVE</p>
         <p>CAREER PORTFOLIO</p>
-      </span>
+      </div>
 
-      <!-- Text below must be right-aligned -->
-      <span class="right-aligned">
+      <div class="right-aligned">
         <p>CABINET 01 · FOUR FOLDERS</p>
-      </span>
+      </div>
     </header>
 
     <div class="drawer">
 
       <div class="spacer-left"></div>
 
-      <nav>
+      <nav aria-label="Portfolio sections">
         <ul class="folder-tab-group">
           <li><a class="folder-tab home" href="#home">01 - HOME</a></li>
           <li><a class="folder-tab projects" href="#projects">02 - PROJECTS</a></li>
@@ -70,11 +69,11 @@
 
             <hr />
 
-            <span class="home-details">
+            <div class="home-details">
               <p>FILE: YOFIEL_TE</p>
               <p>FIELD: INFORMATION TECHNOLOGY</p>
               <p>SPECIALIZATION: CLOUD COMPUTING</p>
-            </span>
+            </div>
 
             <div class="additional-nav">
 
@@ -118,7 +117,7 @@
             <h2 class="content-title">Project files.</h2>
             <p class="archive-details">A place for the work I'm building.</p>
             <!--Counts the number of projects-->
-            <p class="blue-label">00 PROJECTS</p>
+            <p id="project-count" class="blue-label" aria-live="polite">00 PROJECTS</p>
 
             <div class="project-container">
               <article class="project-item">
@@ -126,8 +125,8 @@
                 <img src="imgPlaceholder.jpg" alt="Description of project image" />
                 <p class="blue-label">MANAGEMENT SYSTEM</p>
                 <h3>Learning Management System</h3>
-                <p>Project description goes here.</p>
-                <a class="viewProjectBtn" href="path/to/project-link.html" target="_blank">View Project</a>
+                <p>Coming soon.</p>
+                <a class="viewProjectBtn" href="path/to/project-link.html" target="_blank" rel="noopener">View Project</a>
               </article>
 
               <!-- Additional project items can go here -->
@@ -235,13 +234,13 @@
 
                 <div class="contact-item">
                   <p class="contact-label">EMAIL</p>
-                  <a class="contact-link" href="mailto:te.yofiel@gmail.com">My email address <span
+                  <a class="contact-link" href="mailto:yofiel1te@gmail.com">My email address <span
                       aria-hidden="true">↗</span></a>
                 </div>
 
                 <div class="contact-item">
                   <p class="contact-label">LINKEDIN</p>
-                  <a class="contact-link" href="https://www.linkedin.com/in/te-yofiel" target="_blank" rel="noopener">My
+                  <a class="contact-link" href="https://www.linkedin.com/in/yofielte/" target="_blank" rel="noopener">My
                     LinkedIn URL <span aria-hidden="true">↗</span></a>
                 </div>
 
@@ -254,7 +253,7 @@
 
               <!-- Right: form card -->
               <aside class="contact-form">
-                <form action="">
+                <form id="contact-form" action="">
                   <p class="blue-label">CORRESPONDENCE / NEW MESSAGE</p>
 
                   <label for="name">Name</label>
@@ -267,7 +266,7 @@
                   <textarea id="message" name="message" rows="4" placeholder="What would you like to talk about?"
                     required></textarea>
 
-                  <button class="form-submit" type="submit">Submit <span aria-hidden="true">↗</span></button>
+                  <button class="form-submit" type="submit">Send email <span aria-hidden="true">↗</span></button>
 
                 </form>
               </aside>
@@ -303,7 +302,7 @@
 
 
 
-  <script src="script.js"></script>
+  <script src="script.js" defer></script>
 </body>
 
 </html>
