@@ -3,7 +3,12 @@
   const tabs    = [...document.querySelectorAll('.folder-tab')];
   const stack   = document.querySelector('.folder-stack');
   const nav     = document.querySelector('.drawer nav');
+  const experience = document.getElementById('experience');
+  const projectContainer = document.querySelector('.project-container');
+  const projectCount = document.getElementById('project-count');
+  const contactForm = document.getElementById('contact-form');
   if (!folders.length || !stack || !nav) return;
+  const folderIndex = new Map(folders.map((folder, index) => [folder, index]));
 
   /* ---------- Configuration ---------- */
   const DURATION = 420;                          // ms
@@ -118,7 +123,7 @@
   function fold(from, to) {
     busy = true;
     const hadFocus = from.contains(document.activeElement);
-    const forward  = folders.indexOf(to) > folders.indexOf(from);
+    const forward  = folderIndex.get(to) > folderIndex.get(from);
 
     from.classList.remove('is-active');
     from.classList.add('is-outgoing', forward ? 'is-front' : 'is-back');
@@ -169,7 +174,6 @@
 
   function goToTimelineItem(id) {
     const target = document.getElementById(id);
-    const experience = document.getElementById('experience');
     if (!target || !experience) return;
 
     setHash(id);
@@ -222,39 +226,40 @@
   window.addEventListener('popstate', fromHash);
 
   /* ---------- Scroll-to-advance navigation ---------- */
-  const edgeOf = () => {
-    if (window.scrollY <= 0) return -1;
-    if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2) return 1;
-    return 0;
-  };
-
-  let edge = edgeOf();
   let edgeSince = performance.now();
+  let edgeDirection = null;
   let overscroll = 0;
   let lastWheel = 0;
 
   function resetEdge() {
-    edge = edgeOf();
+    edgeDirection = null;
     edgeSince = performance.now();
     overscroll = 0;
   }
-
-  window.addEventListener('scroll', () => {
-    const e = edgeOf();
-    if (e !== edge) {
-      edge = e;
-      edgeSince = performance.now();
-      overscroll = 0;
-    }
-  }, { passive: true });
 
   window.addEventListener('wheel', (e) => {
     if (busy || e.ctrlKey || reduceQuery.matches || mobileQuery.matches) return;
 
     const dir = e.deltaY > 0 ? 1 : -1;
-    if (dir !== edge) { overscroll = 0; return; }       // not resting at that edge
+    const bounds = active ? active.getBoundingClientRect() : null;
+    const atTop = bounds ? bounds.top >= -2 : window.scrollY <= 0;
+    const atBottom = bounds
+      ? bounds.bottom <= window.innerHeight + 2
+      : window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
+    const atEdge = dir === 1 ? atBottom : atTop;
+    if (!atEdge) {
+      edgeDirection = null;
+      overscroll = 0;
+      return;
+    }
 
     const now = performance.now();
+    if (edgeDirection !== dir) {
+      edgeDirection = dir;
+      edgeSince = now;
+      overscroll = 0;
+      return;
+    }
     if (now - edgeSince < EDGE_DWELL) return;           // let momentum scrolling settle first
     if (now - lastWheel > 300) overscroll = 0;          // treat a pause as a new gesture
     lastWheel = now;
@@ -262,7 +267,7 @@
 
     if (overscroll >= OVERSCROLL_PX) {
       overscroll = 0;
-      const next = folders[folders.indexOf(active) + dir];
+      const next = folders[folderIndex.get(active) + dir];
       if (next) goTo(next.id);
     }
   }, { passive: true });
@@ -272,8 +277,11 @@
   const indexLinks = new Map(
     items.map((it) => [it, document.querySelector(`.history-index a[href="#${it.id}"]`)])
   );
+  let currentTimelineItem = null;
 
   function setCurrent(current) {
+    if (current === currentTimelineItem) return;
+    currentTimelineItem = current;
     items.forEach((it) => {
       const on = it === current;
       it.classList.toggle('is-current', on);
@@ -284,8 +292,7 @@
 
   function updateHistory() {
     if (!items.length) return;
-    const exp = document.getElementById('experience');
-    if (!exp || !(exp.classList.contains('is-active') || exp.classList.contains('is-incoming'))) return;
+    if (!experience || !(experience.classList.contains('is-active') || experience.classList.contains('is-incoming'))) return;
     const line = window.innerHeight * 0.4;
     let current = items[0];
     items.forEach((it) => {
@@ -295,8 +302,6 @@
   }
   /* ---------- Project count ---------- */
   function updateProjectCount() {
-    const projectContainer = document.querySelector('.project-container');
-    const projectCount = document.getElementById('project-count');
     if (!projectContainer || !projectCount) return;
 
     const count = projectContainer.querySelectorAll('.project-item').length;
@@ -304,7 +309,6 @@
   }
 
   /* ---------- Contact form email ---------- */
-  const contactForm = document.getElementById('contact-form');
   if (contactForm) {
     contactForm.addEventListener('submit', (event) => {
       event.preventDefault();
@@ -330,7 +334,6 @@
   }, { passive: true });
 
   /* ---------- Project count updates ---------- */
-  const projectContainer = document.querySelector('.project-container');
   if (projectContainer) {
     new MutationObserver(updateProjectCount).observe(projectContainer, { childList: true });
   }
