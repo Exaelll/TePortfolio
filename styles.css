@@ -6,6 +6,10 @@
     font-size: 14px;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 p,
 h1,
 h2,
@@ -217,7 +221,9 @@ hr {
         min-width: 0;
     }
 
-    .additional-nav-items h3 {
+    .additional-nav-items a {
+        text-decoration: none;
+        color: #252F34;
         font-size: 1.6em;
         margin: 0;
         margin-bottom: 15px;
