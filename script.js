@@ -348,4 +348,5 @@
   updateHistory();
   updateProjectCount();
   resetEdge();
+  document.documentElement.classList.add('js');
 })();
