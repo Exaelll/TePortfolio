@@ -142,6 +142,7 @@ hr {
     display: flex;
     align-items: center;
     justify-content: center;
+    column-gap: 0.35em;
     width: 100%;
     /* fill the li instead of using vw */
     min-height: 5vh;
@@ -678,6 +679,81 @@ hr {
     margin: 5px 0;
 }
 
+/* ---------- Desktop scroll cue ---------- */
+.scroll-cue {
+    display: none;
+}
+
+@media (min-width: 901px) {
+    .scroll-cue {
+        display: flex;
+        position: fixed;
+        right: 28px;
+        bottom: 28px;
+        z-index: 10;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 14px;
+        color: var(--color-paper);
+        background-color: rgba(37, 44, 48, 0.92);
+        border: 1px solid rgba(248, 245, 237, 0.45);
+        border-radius: 999px;
+        font-family: var(--font-mono);
+        font-size: 0.72em;
+        letter-spacing: 0.08em;
+        opacity: 1;
+        transition: opacity 0.45s ease, transform 0.45s ease;
+        animation: scroll-cue-intro 0.7s ease-out both;
+    }
+
+    .scroll-cue.is-hidden {
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(8px);
+        animation: none;
+    }
+
+    .scroll-cue-mouse {
+        display: flex;
+        width: 16px;
+        height: 25px;
+        justify-content: center;
+        padding-top: 5px;
+        border: 1px solid var(--color-paper);
+        border-radius: 10px;
+    }
+
+    .scroll-cue-wheel {
+        width: 3px;
+        height: 6px;
+        border-radius: 999px;
+        background-color: var(--color-paper);
+        animation: scroll-cue-wheel 1.1s ease-in-out infinite;
+    }
+
+    @keyframes scroll-cue-intro {
+        from {
+            opacity: 0;
+            transform: translateY(8px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes scroll-cue-wheel {
+        0%, 100% {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        50% {
+            transform: translateY(6px);
+            opacity: 0.35;
+        }
+    }
+}
+
 /* ---------- Folder animation and interaction states ---------- */
 
     /* Selected tab */
@@ -801,6 +877,11 @@ hr {
 
         .folder-tab {
             transition: none;
+        }
+
+        .scroll-cue,
+        .scroll-cue-wheel {
+            animation: none;
         }
     }
 

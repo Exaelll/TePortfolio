@@ -7,6 +7,7 @@
   const projectContainer = document.querySelector('.project-container');
   const projectCount = document.getElementById('project-count');
   const contactForm = document.getElementById('contact-form');
+  const scrollCue = document.querySelector('.scroll-cue');
   if (!folders.length || !stack || !nav) return;
   const folderIndex = new Map(folders.map((folder, index) => [folder, index]));
 
@@ -28,6 +29,20 @@
   let busy    = false;
   let pending = null;
   let pendingTimelineId = null;
+
+  /* ---------- Timed desktop scroll cue ---------- */
+  if (scrollCue && !mobileQuery.matches && !reduceQuery.matches) {
+    const hideScrollCue = () => {
+      scrollCue.classList.add('is-hidden');
+      scrollCue.setAttribute('aria-hidden', 'true');
+    };
+
+    window.setTimeout(hideScrollCue, 4200);
+    window.addEventListener('wheel', hideScrollCue, { once: true, passive: true });
+    window.addEventListener('keydown', hideScrollCue, { once: true });
+  } else if (scrollCue) {
+    scrollCue.remove();
+  }
 
   /* ---------- Folder and navigation helpers ---------- */
   const folderFor = (id) => {
