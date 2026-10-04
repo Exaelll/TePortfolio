@@ -329,8 +329,12 @@ hr {
         transition: font-size 0.3s ease, background-color 0.3s ease;
     }
 
-    .viewProjectBtn:hover {
-        background-color: #eceae2;
+    .project-item:hover .viewProjectBtn {
+        background-color: #f7f6f3;
+    }
+
+    .project-item:hover .viewProjectBtn:hover {
+        background-color: #ebeae8;
         font-size: 1.1em;
     }
 
