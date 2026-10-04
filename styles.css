@@ -134,6 +134,10 @@ hr {
     /* lets the li shrink below its content width */
 }
 
+.tab-number {
+    font-family: var(--font-mono);
+}
+
 .folder-tab {
     display: flex;
     align-items: center;
@@ -186,6 +190,7 @@ hr {
         font-size: 6.5em;
         color: var(--color-ink);
         font-weight: bold;
+        margin: 0;
     }
 
     .job-title {
@@ -991,12 +996,12 @@ hr {
     }
 
     .drawer-face {
-        margin: 8px;
+        margin: 8px 0;
         padding: 14px;
     }
 
     .drawer-handle {
-        width: 100%;
+        width: 40vw;
         padding: 12px;
     }
 
