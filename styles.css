@@ -313,6 +313,7 @@ hr {
         height: 23vh;
         border-radius: 3px;
         margin-bottom: 25px;
+        filter: grayscale(80%);
     }
 
     .viewProjectBtn {
