@@ -435,6 +435,12 @@ hr {
         /* must match the .folder-content background */
     }
 
+    /* pale dot for past records */
+    .timeline-item.past::before {
+        background-color: #d9e5e9;
+        border-color: #b8cbd2;
+    }
+
     /* ---------- Timeline text ---------- */
     .timeline-item p {
         margin-bottom: 12px;
